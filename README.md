@@ -20,22 +20,21 @@ This project is a simple implementation of 2D rendering to create a 3D-like hous
 1. Clone or download this repository:
    ```bash
    git clone https://github.com/Igichuki/graphics_lab2.git
-   cd 3d-house-rendering
-Install the required library:
+   cd 2d-house-rendering
+2. Install the required library:
+   ```bash
+   pip install pycairo
 
-bash
-Copy code
-pip install pycairo
-Run the script:
+3. Run the script:
+   ```bash
+   python house_rendering.py
 
-bash
-Copy code
-python house_rendering.py
-File Structure
+## File Structure
 house_rendering.py: Main script for generating the house illustration.
 updated_3d_house.png: The output image rendered by the script.
 README.md: Documentation file.
-How It Works
+
+## How It Works
 This project uses the Cairo Graphics Library to draw various components of the house step-by-step:
 
 Grass Platform: Two rectangles are drawn to simulate a 3D platform with top and side faces.
@@ -46,24 +45,28 @@ Windows and Panes: Blue rectangles are divided into four quadrants with white li
 Door and Steps:
 The door includes a small window.
 Three stacked rectangles simulate a staircase leading to the door.
-Output
+
+## Output
 Running the script will generate a PNG file named updated_3d_house.png, which looks like this:
 
 
-Customization
+## Customization
 You can easily modify the code to customize the design:
 
 Colors: Update the RGB values in the set_color() function calls.
 Dimensions: Adjust rectangle sizes and positions to change the proportions of the house and its components.
 Additional Features: Add more elements like trees, fences, or pathways by creating new shapes.
-Learning Objectives
+
+## Learning Objectives
 This project is ideal for students or developers interested in:
 
 Learning basic 2D rendering with Python
 Understanding the layering technique to simulate 3D objects
 Practicing modular and reusable code design for graphical applications
-Troubleshooting
+
+## Troubleshooting
 Ensure you have Python and pycairo installed correctly.
 If the output image looks distorted, check your screen resolution or adjust the canvas size (WIDTH and HEIGHT).
-License
+
+## License
 This project is licensed under the MIT License. Feel free to use and modify the code for personal or educational purposes.
