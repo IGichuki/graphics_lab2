@@ -2,7 +2,7 @@
 
 This project is a simple implementation of 2D rendering to create a 3D-like house illustration using Python and the **Cairo Graphics Library**. It demonstrates basic graphics programming concepts, including shapes, colors, and layering to create depth and perspective.
 
-## Features
+## Features:
 
 - **Grass Platform**: A 3D platform with top and side faces to simulate depth.
 - **House Structure**: A 3D-style house with walls, roof, and chimney.
