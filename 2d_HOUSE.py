@@ -1,75 +1,102 @@
 import cairo
 
-# Set up the canvas dimensions
-WIDTH, HEIGHT = 800, 800
+# Set up the canvas
+WIDTH, HEIGHT = 800, 600
 surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, WIDTH, HEIGHT)
 context = cairo.Context(surface)
-context.set_source_rgb(1,1,1)
-context.paint()
-#create roof
-# left side
-context.set_source_rgb(0.5,0.5,0.5)
-context.move_to(180, 200)
-context.line_to(250, 150)
-context.line_to(320, 200)
-context.close_path()
-context.set_source_rgb(0.9,0.85,0.8)
-context.fill_preserve()
-context.stroke()
 
-#right side
-context.set_source_rgb(0.5,0.5,0.5)
-context.move_to(540, 67)
-context.line_to(610, 17)
-context.line_to(680, 67)
-context.stroke()
-#connect right side
-context.move_to(320, 200)
-context.line_to(680, 67)
-context.line_to(610, 17)
-context.line_to(250, 150)
-context.close_path()
-context.fill_preserve()
-context.set_source_rgb(0.5,0.5,0.5)
-context.set_line_width(2)
-context.stroke()
-#connect left side
-context.move_to(180, 200)
-context.line_to(540, 67)
-context.line_to(610, 17)
-context.line_to(250, 150)
-context.close_path()
-context.fill_preserve()
-context.set_source_rgb(0.5,0.5,0.5)
-context.set_line_width(2)
-context.stroke()
-#Housebody
-context.move_to(330, 200)
-context.line_to(330, 600)
-context.line_to(670, 467)
-context.line_to(670, 67)
-context.close_path()
-context.set_source_rgb(0.9,0.85,0.8)
-context.fill_preserve()
-context.set_line_width(2)
-context.stroke()
-#LEFT HOUSE
-context.move_to(182, 200)
-context.line_to(180, 467)
-context.line_to(330, 600)
-context.line_to(330, 200)
-context.close_path()
-context.set_source_rgb(0.9,0.85,0.8)
-context.fill_preserve()
-context.set_line_width(2)
-context.stroke()
-#door
-context.rectangle(610, 400, 60, 80)
-context.close_path()
-context.set_source_rgb(0.5,0.5,0.5)
-context.fill_preserve()
-context.set_line_width(2)
-context.stroke()
+# Colors
+def set_color(context, r, g, b):
+    context.set_source_rgb(r, g, b)
 
-# Save the image
-surface.write_to_png("2d_house.png")
+# Draw the isometric grass platform
+def draw_grass_platform():
+    # Top face of the grass platform
+    set_color(context, 0.5, 0.8, 0.4)  # Green
+    context.move_to(200, 400)
+    context.line_to(600, 400)
+    context.line_to(700, 450)
+    context.line_to(300, 450)
+    context.close_path()
+    context.fill()
+
+    # Side face (front)
+    set_color(context, 0.3, 0.6, 0.2)  # Darker green
+    context.move_to(300, 450)
+    context.line_to(700, 450)
+    context.line_to(700, 480)
+    context.line_to(300, 480)
+    context.close_path()
+    context.fill()
+
+# Draw the house
+def draw_house():
+    # Front wall
+    set_color(context, 0.85, 0.8, 0.75)  # Light beige
+    context.rectangle(330, 250, 140, 150)
+    context.fill()
+
+    # Side wall
+    set_color(context, 0.8, 0.75, 0.7)  # Slightly darker beige
+    context.move_to(330, 250)
+    context.line_to(330, 400)
+    context.line_to(250, 350)
+    context.line_to(250, 200)
+    context.close_path()
+    context.fill()
+
+    # Roof
+    set_color(context, 0.1, 0.2, 0.4)  # Dark blue
+    context.move_to(250, 200)
+    context.line_to(330, 250)
+    context.line_to(470, 250)
+    context.line_to(390, 200)
+    context.close_path()
+    context.fill()
+
+    # Chimney
+    set_color(context, 0.7, 0.7, 0.7)  # Gray
+    context.rectangle(370, 190, 20, 40)
+    context.fill()
+
+# Draw windows
+def draw_windows():
+    set_color(context, 0.6, 0.85, 1)  # Light blue
+    # Left-side window
+    context.rectangle(265, 230, 30, 40)
+    context.fill()
+
+    # Front windows
+    for y in [270, 310]:
+        context.rectangle(350, y, 40, 40)
+        context.fill()
+
+# Draw the door
+def draw_door():
+    set_color(context, 0.1, 0.3, 0.6)  # Dark blue
+    context.rectangle(380, 350, 30, 50)
+    context.fill()
+
+    # Door frame
+    set_color(context, 0.5, 0.8, 1)  # Light blue for window
+    context.rectangle(385, 360, 20, 30)
+    context.fill()
+
+# Draw steps in front of the door
+def draw_steps():
+    set_color(context, 0.7, 0.7, 0.7)  # Light gray
+    context.rectangle(370, 400, 50, 10)  # Bottom step
+    context.fill()
+    context.rectangle(375, 390, 40, 10)  # Top step
+    context.fill()
+
+# Combine all components
+draw_grass_platform()
+draw_house()
+draw_windows()
+draw_door()
+draw_steps()
+
+# Save to file
+surface.write_to_png("isometric_house.png")
+print("Isometric house image saved as isometric_house.png")
