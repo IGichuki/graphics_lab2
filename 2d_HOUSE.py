@@ -1,129 +1,150 @@
 import cairo
 
-# Set up the canvas
-WIDTH, HEIGHT = 1000, 800
+# Set up the canvas dimensions
+WIDTH, HEIGHT = 800, 800
 surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, WIDTH, HEIGHT)
 context = cairo.Context(surface)
+context.set_source_rgb(1, 1, 1)
+context.paint()
 
-# Colors
-def set_color(context, r, g, b):
-    context.set_source_rgb(r, g, b)
+# Create roof
+# Left side
+context.set_source_rgb(0.5, 0.5, 0.5)
+context.move_to(180, 200)
+context.line_to(250, 150)
+context.line_to(320, 200)
+context.close_path()
+context.set_source_rgb(0.9, 0.85, 0.8)
+context.fill_preserve()
+context.stroke()
 
-# Draw the grass platform as a 3D cuboid
-def draw_grass_platform():
-    # Bottom face of the cuboid (light green)
-    set_color(context, 0.5, 0.8, 0.4)  # Light green
-    context.move_to(150, 500)  # Extended left side of the platform
-    context.line_to(800, 500)  # Extend the platform's length
-    context.line_to(800, 550)
-    context.line_to(150, 550)  # Bottom face, extended left side
-    context.close_path()
-    context.fill()
+# Right side
+context.set_source_rgb(0.5, 0.5, 0.5)
+context.move_to(540, 67)
+context.line_to(610, 17)
+context.line_to(680, 67)
+context.stroke()
 
-    # Left side face (darker green)
-    set_color(context, 0.3, 0.6, 0.3)  # Darker green
-    context.move_to(150, 500)  # Extended left side
-    context.line_to(150, 550)
-    context.line_to(200, 580)
-    context.line_to(200, 530)  # Increased length of left face
-    context.close_path()
-    context.fill()
+# Connect right side
+context.move_to(320, 200)
+context.line_to(680, 67)
+context.line_to(610, 17)
+context.line_to(250, 150)
+context.close_path()
+context.fill_preserve()
+context.set_source_rgb(0.5, 0.5, 0.5)
+context.set_line_width(2)
+context.stroke()
 
-    # Right side face (darker green)
-    set_color(context, 0.4, 0.7, 0.4)  # Slightly darker green
-    context.move_to(800, 500)
-    context.line_to(800, 550)
-    context.line_to(750, 580)
-    context.line_to(750, 530)
-    context.close_path()
-    context.fill()
+# Connect left side
+context.move_to(180, 200)
+context.line_to(540, 67)
+context.line_to(610, 17)
+context.line_to(250, 150)
+context.close_path()
+context.fill_preserve()
+context.set_source_rgb(0.5, 0.5, 0.5)
+context.set_line_width(2)
+context.stroke()
 
-# Draw the house
-def draw_house():
-    # Front wall
-    set_color(context, 0.85, 0.8, 0.75)  # Light beige
-    context.rectangle(400, 250, 200, 300)  # Larger house
-    context.fill()
+# House body
+context.move_to(330, 200)
+context.line_to(330, 600)
+context.line_to(670, 467)
+context.line_to(670, 67)
+context.close_path()
+context.set_source_rgb(0.9, 0.85, 0.8)
+context.fill_preserve()
+context.set_line_width(2)
+context.stroke()
 
-    # Side wall
-    set_color(context, 0.8, 0.75, 0.7)  # Slightly darker beige
-    context.move_to(400, 250)
-    context.line_to(400, 550)
-    context.line_to(330, 500)
-    context.line_to(330, 200)
-    context.close_path()
-    context.fill()
+# Left house
+context.move_to(182, 200)
+context.line_to(180, 467)
+context.line_to(330, 600)
+context.line_to(330, 200)
+context.close_path()
+context.set_source_rgb(0.9, 0.85, 0.8)
+context.fill_preserve()
+context.set_line_width(2)
+context.stroke()
 
-    # Pitched Roof
-    set_color(context, 0.1, 0.2, 0.4)  # Dark blue
-    context.move_to(330, 200)  # Left corner
-    context.line_to(400, 250)  # Front-left top
-    context.line_to(600, 250)  # Front-right top
-    context.line_to(530, 200)  # Right corner
-    context.line_to(465, 160)  # Roof apex
-    context.close_path()
-    context.fill()
+# Add slanted windows to the left house
+context.set_source_rgb(0.678, 0.847, 0.902)  # Light blue
+# Top-left window
+context.move_to(200, 230)
+context.line_to(260, 210)
+context.line_to(260, 300)
+context.line_to(200, 320)
+context.close_path()
+context.fill_preserve()
+context.set_source_rgb(0, 0, 0)
+context.stroke()
 
-    # Roof Overhang
-    set_color(context, 0.05, 0.1, 0.3)  # Darker blue
-    context.move_to(330, 200)
-    context.line_to(465, 160)  # Apex
-    context.line_to(530, 200)
-    context.line_to(465, 140)  # Higher apex for overhang
-    context.close_path()
-    context.fill()
+# Top-right window
+context.set_source_rgb(0.678, 0.847, 0.902)  # Light blue
+context.move_to(265, 215)
+context.line_to(325, 200)
+context.line_to(325, 290)
+context.line_to(265, 310)
+context.close_path()
+context.fill_preserve()
+context.set_source_rgb(0, 0, 0)
+context.stroke()
 
-    # Chimney
-    set_color(context, 0.7, 0.7, 0.7)  # Gray
-    context.rectangle(490, 180, 30, 70)
-    context.fill()
+# Bottom-left window
+context.set_source_rgb(0.678, 0.847, 0.902)  # Light blue
+context.move_to(200, 360)
+context.line_to(260, 340)
+context.line_to(260, 430)
+context.line_to(200, 450)
+context.close_path()
+context.fill_preserve()
+context.set_source_rgb(0, 0, 0)
+context.stroke()
 
-# Draw windows
-def draw_windows():
-    set_color(context, 0.6, 0.85, 1)  # Light blue
+# Bottom-right window
+context.set_source_rgb(0.678, 0.847, 0.902)  # Light blue
+context.move_to(265, 350)
+context.line_to(325, 330)
+context.line_to(325, 425)
+context.line_to(265, 445)
+context.close_path()
+context.fill_preserve()
+context.set_source_rgb(0, 0, 0)
+context.stroke()
 
-    # Top-floor windows
-    context.rectangle(420, 270, 50, 70)  # Left window
-    context.fill()
-    context.rectangle(530, 270, 50, 70)  # Right window
-    context.fill()
+# Add slanted door
+context.set_source_rgb(0.5, 0.5, 0.5)  # Grey
+context.move_to(570, 370)
+context.line_to(660, 350)
+context.line_to(660, 470)
+context.line_to(570, 505)
+context.close_path()
+context.fill_preserve()
+context.stroke()
 
-    # Bottom-floor windows
-    context.rectangle(420, 380, 50, 70)  # Left window
-    context.fill()
-    context.rectangle(530, 380, 50, 70)  # Right window
-    context.fill()
 
-# Draw the door
-def draw_door():
-    set_color(context, 0.1, 0.3, 0.6)  # Dark blue
-    context.rectangle(480, 450, 40, 100)  # Taller door
-    context.fill()
+# Add chimney on the roof
+context.set_source_rgb(0.9, 0.85, 0.8)
+context.move_to(510, 60)  # Bottom-left corner of chimney base
+context.line_to(510, 30)  # Top-left corner
+context.line_to(540, 30)  # Top-right corner
+context.line_to(540, 60)  # Bottom-right corner
+context.close_path()
+context.fill_preserve()
+context.stroke()
 
-    # Door window
-    set_color(context, 0.5, 0.8, 1)  # Light blue
-    context.rectangle(485, 470, 30, 50)
-    context.fill()
+# Chimney cap
+context.set_source_rgb(0.3, 0.15, 0.15)  # Darker brown
+context.move_to(505, 30)
+context.line_to(545, 30)
+context.line_to(540, 25)
+context.line_to(510, 25)
+context.close_path()
+context.fill_preserve()
+context.stroke()
 
-# Draw steps in front of the door
-def draw_steps():
-    set_color(context, 0.7, 0.7, 0.7)  # Light gray
 
-    # Three descending steps
-    context.rectangle(470, 550, 60, 15)  # Bottom step
-    context.fill()
-    context.rectangle(475, 535, 50, 15)  # Middle step
-    context.fill()
-    context.rectangle(480, 520, 40, 15)  # Top step
-    context.fill()
-
-# Combine all components
-draw_grass_platform()
-draw_house()
-draw_windows()
-draw_door()
-draw_steps()
-
-# Save to file
+# Save the image
 surface.write_to_png("2d_house.png")
-print("improved house is done!")
